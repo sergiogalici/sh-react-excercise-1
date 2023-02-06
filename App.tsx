@@ -7,6 +7,17 @@ type Reservation = {
   numOfGuests: number;
 };
 
+const ResComponent = ({ id, name, numOfGuests, handleSave, handleDelete }) => {
+  return (
+    <div key={id}>
+      <input type="text" value={name} />
+      <input type="number" min="1" defaultValue={numOfGuests} />
+      <button onClick={() => handleSave(id)}>Save</button>
+      <button onClick={() => handleDelete(id)}>Delete</button>
+    </div>
+  );
+};
+
 export default function App() {
   const [name, setName] = React.useState<string>('');
   const [reservations, setReservations] = React.useState<Reservation[]>([]);
@@ -62,13 +73,14 @@ export default function App() {
         onChange={handleNumOfGuestsChange}
       />
       <button onClick={handleBookNow}>Book Now</button>
-      {reservations.map((reservation) => (
-        <div key={reservation.id}>
-          <input type="text" value={reservation.name} />
-          <input type="number" min="1" defaultValue={reservation.numOfGuests} />
-          <button onClick={() => handleSave(reservation.id)}>Save</button>
-          <button onClick={() => handleDelete(reservation.id)}>Delete</button>
-        </div>
+      {reservations.map((res) => (
+        <ResComponent
+          id={res.id}
+          name={res.name}
+          numOfGuests={res.numOfGuests}
+          handleSave={handleSave}
+          handleDelete={handleDelete}
+        />
       ))}
     </div>
   );
