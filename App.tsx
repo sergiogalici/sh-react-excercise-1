@@ -7,7 +7,21 @@ type Reservation = {
   numOfGuests: number;
 };
 
-const ResComponent = ({ id, name, numOfGuests, handleSave, handleDelete }) => {
+type ResCompProps = {
+  id: number;
+  name: string;
+  numOfGuests: number;
+  handleSave: (id: number) => void;
+  handleDelete: (id: number) => void;
+};
+
+const ResComponent = ({
+  id,
+  name,
+  numOfGuests,
+  handleSave,
+  handleDelete,
+}: ResCompProps) => {
   return (
     <div key={id}>
       <input type="text" value={name} />
