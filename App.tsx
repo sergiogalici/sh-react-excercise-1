@@ -48,6 +48,9 @@ export default function App() {
   };
 
   const handleBookNow = () => {
+    if (!name.length) {
+      return;
+    }
     setReservations([
       ...reservations,
       {
